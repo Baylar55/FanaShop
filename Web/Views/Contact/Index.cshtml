@@ -1,0 +1,39 @@
+﻿@using Web.ViewModels.Contact
+@model ContactIndexVM
+
+@if (Model.Location != null)
+{
+    <section class="section-map">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="g-map">
+                        <div id="map-container-google" class="z-depth-1-half map-container">
+                            @Html.Raw(Model.Location.EmbedCode)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="section-contact">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model.ContactComponents)
+            {
+                <div class="col-lg-4 col-md-8">
+                    <div class="contact-us">
+                        <div class="contact-us-wrap">
+                            <div class="contact-us-icon">@Html.Raw(item.IconCode)</div>
+                            <span class="contact-us-info-heading">@Html.Raw(@item.Title)</span>
+                            <span class="contact-us-info-p">@Html.Raw(item.Description)</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@await Component.InvokeAsync("Feature")

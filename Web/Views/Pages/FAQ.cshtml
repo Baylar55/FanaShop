@@ -1,0 +1,99 @@
+﻿@using Web.ViewModels.Pages
+@model PagesIndexVM
+
+<section class="intro-banner">
+    <div>
+        <img src="~/assets/img/breadcrumbs-woo.jpg" class="img-fluid">
+        <div class="banner-text">
+            <p class="banner-title">Fana Shop</p>
+        </div>
+    </div>
+</section>
+
+<section class="intro-content-container">
+    <div class="intro-image">
+        <img src="~/assets/img/faqs-01.jpg">
+    </div>
+
+    <div class="intro-content">
+        <div class="intro-content-title">
+            <h2>
+                Awkwardness gives me great comfort. I’ve never been cool, but I’ve felt cool. I’ve been in the cool
+                place, but I wasn’t really cool – I was trying to pass for hip or cool.
+            </h2>
+        </div>
+        <div class="intro-content-text">
+            <p class="text">
+                A girl should be two things: classy and fabulous. I am convinced that there can be luxury in
+                simplicity. I wanted to dress the woman who lives and works, not the woman in a painting. It’s hard
+                to balance everything. It’s always challenging. My relationships with producers or photographers –
+                these are relationships that took years. I can’t get sucked into that celebrity thing, because I
+                think it’s just crass. My aim is to make the poor look rich.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="characteristics">
+
+    @foreach (var characteristic in Model.Characteristics)
+    {
+        <div class="col-md-4">
+            <div class="icon-box">@Html.Raw(characteristic.IconCode)</div>
+            <div class="content-box">
+                @Html.Raw(@characteristic.Title)
+                @Html.Raw(characteristic.Description)
+            </div>
+        </div>
+    }
+</section>
+
+<section class="questions no-select">
+    <div class="questions-container">
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                <div class="questions-tabs" data-aos="fade-up" data-aos-duration="2000">
+                    @foreach (var category in Model.FAQCategories)
+                    {
+                        <div class="tab questionCategory " data-id="@category.Id">
+                            <h5 class="tab-title">@category.Title</h5>
+                            <p class="tab-text">
+                                @category.Description
+                            </p>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-8">
+                <div class="questions-content" data-aos="fade-up" data-aos-duration="2000">
+                    <h5 class="content-title">About Fana Shop</h5>
+                    <p class="help-center">
+                        Can’t find it here? Check out our<a asp-controller="pages" asp-action="about" class="help-link">
+                            Help
+                            Center
+                        </a>
+                    </p>
+                    <div class="question" id="questionContainer">
+                        <ul id="accordion">
+                            @{
+                                foreach (var question in Model.Questions)
+                                {
+                                    <li data-aos="fade-up" data-aos-duration="2000">
+                                        <span>
+                                            @Html.Raw(@question.Title)
+                                        </span>
+                                        <div>
+                                            @Html.Raw(question.Answer)
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("Feature");

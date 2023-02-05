@@ -1,0 +1,111 @@
+﻿@using Web.ViewModels.Pages
+@model SingleBlogIndexVM
+@{
+    string[] paragraphs = @Model.Blog.Description.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+    string firstPart = string.Join(Environment.NewLine, paragraphs.Take(paragraphs.Length / 3));
+    string secondPart = string.Join(Environment.NewLine, paragraphs.Skip(paragraphs.Length / 3).Take(paragraphs.Length / 3));
+    string thirdPart = string.Join(Environment.NewLine, paragraphs.Skip(2 * (paragraphs.Length / 3)));
+}
+<section class="blog-detail-section">
+    <div class="detail-post">
+        <div class="bp-detail">
+            <div class="bp-detail-thumbnail">
+                <div>
+                    <img src="~/assets/images/@Model.Blog.CoverPhoto" alt="">
+                </div>
+            </div>
+            <div class="bp-detail-info-wrap">
+                <div class="bp-detail-stat">
+                    <span class="bp-detail-stat-wrap">
+                        <span class="bp-detail-category">
+                            @*Category : @Model.Blog.Category.Title?*@
+                        </span>
+                    </span>
+                </div>
+                <h3>How to choose the right customer for your photo?</h3>
+                <span class="bp-detail-stat-wrap">
+                    <span class="bp-detail-author">
+                        <span><i class="fa-regular fa-circle-user"></i>By @Model.Blog.Author</span>
+                    </span>
+                    <span class="bp-detail-publish-date">
+                        <span><i class="fa-regular fa-clock"></i>@Model.Blog.CreatedAt</span>
+                    </span>
+                </span>
+                <p class="bp-detail-p">
+                    @firstPart
+                </p>
+                <blockquote class="bp-detail-quote">
+                    <i class="fas fa-quote-left"></i>
+                    <span class="bp-detail-quote-title">
+                        The first objective of the plan is to improve awareness and understanding of antimicrobial
+                        resistance through effective communication, education and training
+                    </span>
+                    <cite class="bp-detail-quote-citation">Lauriacater – Manchester, Kentucky 39495</cite>
+                </blockquote>
+                <p class="bp-detail-p">
+                    @secondPart
+                </p>
+                <div>
+                    <div class="blog-sub-images">
+                        <div class="row">
+                            @foreach (var item in Model.Blog.BlogPhotos)
+                            {
+                                <div class="col-md-6 col-sm-12"><img src="~/assets/images/@item.PhotoName"></div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <p class="bp-detail-p">
+                    @thirdPart
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="related-blogposts">
+    <div>
+        <h3>Related Blogs</h3>
+    </div>
+    <div class="row">
+        @foreach (var blog in Model.Blogs)
+        {
+             <div class="blog-element col-md-6 ">
+            <div class="bp-mini bp-mini-img">
+                <div class="bp-mini-thumbnail">
+                    <a href="blog-detail.html">
+                        <img src="~/assets/images/@blog.CoverPhoto" alt="">
+                    </a>
+                </div>
+                <div class="bp-mini-content">
+                    <div class="bp-mini-category">
+                        @*<span>Backpack,</span>
+                        <span>Shorts</span>*@
+                    </div>
+                    <h4>
+                        <a asp-action="singleblog" asp-controller="pages" asp-route-id="@blog.Id">@blog.Title</a>
+                    </h4>
+                    <div class="bp-mini-stat">
+                        <span class="bp-mini-stat-wrap">
+                            <span class="bp-mini-author"><i class="fa-regular fa-circle-user"></i>By @blog.Author</span>
+                        </span>
+                        <span class="bp-mini-stat-wrap">
+                            <span class="bp-mini-publish-date">
+                                <span><i class="fa-regular fa-clock"></i>@blog.CreatedAt</span>
+                            </span>
+                        </span>
+                    </div>
+                    <p class="bp-mini-p">
+                            @{
+                                @Html.Raw(String.Join(" ", @blog.Description.Split(' ').Take(15)));
+                            }  .........
+                        </p>
+                </div>
+            </div>
+            <button><a asp-action="singleblog" asp-controller="pages" asp-route-id="@blog.Id">Read More</a></button>
+        </div>
+        }
+    </div>
+</section>
+
+@await Component.InvokeAsync("Feature");

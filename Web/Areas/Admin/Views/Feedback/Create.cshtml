@@ -1,0 +1,40 @@
+﻿@using Core.Entities;
+@using Web.Areas.Admin.ViewModels.Feedback
+@model FeedbackCreateVM;
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Create Client Feedback
+                        </p>
+                        <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="feedback">
+                            <div class="form-group">
+                                <label asp-for="ClientName">Client Name</label>
+                                <input class="form-control" asp-for="ClientName">
+                                <span class="text-danger" asp-validation-for="ClientName"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <input class="form-control" asp-for="Description">
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Photo</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

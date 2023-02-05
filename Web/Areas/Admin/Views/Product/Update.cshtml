@@ -1,0 +1,147 @@
+﻿@using Core.Constants
+@using Web.Areas.Admin.ViewModels.Product
+@model ProductUpdateVM
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Update Product
+                        </p>
+                        <form method="post" enctype="multipart/form-data" asp-action="update" asp-controller="Product" asp-area="admin">
+
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" asp-for="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input class="form-control" asp-for="Price">
+                                <span class="text-danger" asp-validation-for="Price"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BrandId">Brand</label>
+                                <select class="form-control" asp-for="BrandId" asp-items="Model.Brands"></select>
+                                <span class="text-danger" asp-validation-for="BrandId"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CategoryId">Category</label>
+                                <select class="form-control" asp-for="CategoryId" asp-items="Model.Categories"></select>
+                                <span class="form-text text-danger " asp-validation-for="CategoryId"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Status" class="col-form-label"></label>
+                                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<ProductStatus>()" class="form-control">
+                                </select>
+                                <span class="text-danger" asp-validation-for="Status"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BestSeller">Best Seller</label>
+                                <input class="form-control" asp-for="BestSeller">
+                                <span class="text-danger" asp-validation-for="BestSeller"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MainPhoto">Cover Photo</label>
+                                <input class="form-control" asp-for="MainPhoto">
+                                <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BackPhoto">Back Photo</label>
+                                <input class="form-control" asp-for="BackPhoto">
+                                <span class="text-danger" asp-validation-for="BackPhoto"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photos">Photos</label>
+                                <input class="form-control" asp-for="Photos">
+                                @{
+                                    if (Html.ViewData.ModelState["AboutPhotos"] != null)
+                                    {
+                                        foreach (var error in Html.ViewData.ModelState["AboutPhotos"].Errors)
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    }
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="section-block" id="basicform">
+                                        <h3 class="section-title">Update Color</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.ColorsIds" class="col-form-label"></label>
+                                        <select asp-for="@Model.ColorsIds" asp-items="Model.Colors" class="form-control">
+                                        </select>
+                                        <span style="color:red !important" asp-validation-for="@Model.BrandId"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="section-block" id="basicform">
+                                        <h3 class="section-title">Size Update</h3>
+                                    </div>
+                                    <div class="form-group">
+                                        <label asp-for="@Model.SizesIds" class="col-form-label"></label>
+                                        <select asp-for="@Model.SizesIds" asp-items="Model.Sizes" class="form-control">
+                                        </select>
+                                        <span style="color:red !important" asp-validation-for="@Model.BrandId"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2 mb-2">Submit</button>
+                        </form>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th style="width:100px; text-align:center;">Photo</th>
+                                        <th style="width:30px;">Order</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var photo in Model.ProductPhotos)
+                                    {
+                                        <tr>
+                                            <td>@photo.Id</td>
+                                            <td><img style="height:150px;" src="~/assets/images/@photo.Name" /></td>
+                                            <td>@photo.Order</td>
+
+                                            <td class="d-flex">
+                                                <a class="btn btn-primary mr-2" asp-action="updatephoto" asp-controller="product" asp-area="admin" asp-route-id=@photo.Id>Update</a>
+                                                <form method="post">
+                                                    <button asp-action="deletephoto" asp-controller="product" asp-route-id="@photo.Id" class="btn btn-danger">Delete</button>
+                                                </form>
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

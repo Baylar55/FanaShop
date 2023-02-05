@@ -1,0 +1,46 @@
+﻿@using Web.ViewModels.Basket;
+@model BasketIndexVM;
+
+@{
+    if (Model.Count > 0)
+    {
+        @foreach (var product in Model.BasketProducts)
+        {
+            <div id='@product.Id' class='cart-item basket-products'>
+                <div class="cart-item-left">
+                    <div class='cart-product-image'>
+                        <img src="~/assets/images/@product.Photoname">
+                    </div>
+                </div>
+                <div class="cart-item-right shopping-cart">
+                    <p class='cart-product-name' style="margin-block:0;">@product.Title</p>
+                    <span class="product-price d-block" style="font-weight:600; color:#2f4799; margin-top:10px">$@product.Price</span>
+                    <div class="border-0 align-middle cart-quantity" style="margin-top:-18px;">
+                        <div class="quantity-field" style="padding-block:0;width:100px;height:42px; border-radius:10px; background-color:white;">
+                            <button class="value-button decrease bg-transparent" data-id="@product.Id" data-quantity="@product.Quantity" data-price="@product.Price" onclick="decreaseValue(this)">
+                                <i class="fa-solid fa-minus"></i>
+                            </button>
+                            <div class="number product-quantity-@product.Id" style="height:23px; margin:9px; background-color:white;">@product.Quantity</div>
+                            <button class="value-button increase bg-transparent" data-id="@product.Id" data-quantity="@product.Quantity" data-price="@product.Price" onclick="increaseValue(this)">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <i data-price="@product.Price" data-id="@product.Id" data-quantity="@product.Quantity" class="far fa-trash-alt delete-btn basket-delete"></i>
+            </div>
+        }
+        <div class="total-price  justify-content-around">
+            <div class="subtotal">Subtotal:</div>
+            <div class="total-price-self">
+                <span>$</span><span class="total-price-number" id="sum-price">4500</span>
+            </div>
+        </div>
+        <div class="text-center"><a asp-controller="basket" asp-action="index" class="button">View Cart</a></div>
+
+    }
+    else
+    {
+        <span class="no-cart-item" style="text-align: center;font-weight: 700;padding-left: 20%">No Products In The Basket</span>
+    }
+}

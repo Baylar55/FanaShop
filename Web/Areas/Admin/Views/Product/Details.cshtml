@@ -1,0 +1,92 @@
+﻿@using Web.Areas.Admin.ViewModels.Product;
+@model ProductDetailsVM;
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Model Table</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <th>Title</th>
+                        <td>@Html.Raw(Model.Product.Name)</td>
+                    </tr>
+
+                    <tr>
+                        <th>Description</th>
+                        <td>@Html.Raw(Model.Product.Description)</td>
+                    </tr>
+
+                    <tr>
+                        <th>Price</th>
+                        <td>@Model.Product.Price $</td>
+                    </tr>
+
+                    <tr>
+                        <th>Brand</th>
+                        <td>
+                            @Model.Product.Brand.Title&#174;
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Category</th>
+                        <td>@Model.Product.Category.Title</td>
+                    </tr>
+
+                    <tr>
+                        <th>Colors</th>
+                        <td>
+                            @foreach (var color in @Model.Product.Colors)
+                            {
+                                <p>@color.Color.Name</p>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Sizes</th>
+                        <td>
+                            @foreach (var size in @Model.Product.Sizes)
+                            {
+                                <p>@size.Size.Title</p>
+                            }
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Created At</th>
+                        <td>@Model.Product.CreatedAt.ToString("dddd, dd MMMM yyyy")</td>
+                    </tr>
+
+                    <tr>
+                        <th>Modified At</th>
+                        <td>@Model.Product.ModifiedAt.ToString("dddd, dd MMMM yyyy")</td>
+                    </tr>
+
+                    <tr>
+                        <th>Cover Photo</th>
+                        <td><img style="width:100px; height:100px; object-fit:contain; justify-content:flex-start" src="~/assets/images/@Model.Product.MainPhoto" /></td>
+                    </tr>
+
+                    <tr>
+                        <th>Back Photo</th>
+                        <td><img style="width:100px; height:100px; object-fit:contain; justify-content:flex-start" src="~/assets/images/@Model.Product.BackPhoto" /></td>
+                    </tr>
+                    <tr>
+                        <th>Single Photo</th>
+                        <td>
+                            @foreach (var item in Model.Product.ProductPhotos)
+                            {
+                                <img style="width:100px; height:100px; object-fit:contain; justify-content:flex-start" src="~/assets/images/@item.Name" />
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+                <a asp-action="index" asp-controller="product" class="btn btn-info mb-2">Go to Back</a>
+            </table>
+        </div>
+    </div>
+</div>

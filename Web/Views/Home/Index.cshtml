@@ -1,0 +1,160 @@
+﻿@using Web.ViewModels.Home
+@model HomeIndexVM
+
+<section class="banner no-select mb-5">
+
+    @foreach (var slider in Model.HomeMainSliders)
+    {
+        <div class="banner-page banner-page-@slider.Order" style="background-image: url(/assets/images/@slider.PhotoName);">
+            <div class="caption caption-@slider.Order" data-aos="fade-up" data-aos-duration="2000">
+                @Html.Raw(@slider.Title)
+            </div>
+            <div class="auxilary-caption" data-aos="fade-up" data-aos-duration="2000">
+                @Html.Raw(@slider.Description)
+            </div>
+            <button class="offset" data-aos="fade-up" data-aos-duration="2000">
+                View Products
+            </button>
+        </div>
+    }
+
+    <div class="bullets">
+        <div class="bullet bullet-1 selected"></div>
+        <div class="bullet bullet-2"></div>
+        <div class="bullet bullet-3"></div>
+    </div>
+
+    <div class="overlay">
+    </div>
+</section>
+
+<section class="product-bestsellers pt-3">
+    <div class="bestsellers ps-3 pe-3 mt-5 mb-4">
+        <div class="text-title text-center mb-5">
+            <h1>You are in bestsellers</h1>
+        </div>
+        <div class="product-container">
+            <div class="row">
+
+                @foreach (var product in Model.BestSellerProducts)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mt-4">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a asp-action="singleproduct" asp-controller="shop" asp-route-id="@product.Id" class="image">
+                                    <img class="pic-1" src="~/assets/images/@product.MainPhoto">
+                                    <img class="pic-2" src="~/assets/images/@product.BackPhoto">
+                                </a>
+                                @if (product.Status.ToString() == "Sale")
+                                {
+                                    <span class="product-sale-label" style="background:#FF0000;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "New")
+                                {
+                                    <span class="product-sale-label" style="background:#2F4799;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "Sold")
+                                {
+                                    <span class="product-sale-label" style="background:#2F2F2F;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "Limited")
+                                {
+                                    <span class="product-sale-label" style="background:#FFD700;">@product.Status</span>
+                                }
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title">
+                                    <a asp-action="singleproduct" asp-controller="shop" asp-route-id="@product.Id">
+                                        Favorite Daughter The St. Germain
+                                        Top
+                                    </a>
+                                </h3>
+                                <div class="price">$@product.Price</div>
+                                <ul class="rating">
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                </ul>
+                                <ul class="product-links">
+                                    <li id="addToCart" data-id="@product.Id"><a onclick="launchNotification()"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li class="add-wishlist" data-id="@product.Id"><a onclick="launchNotification()"><i class="fa-regular fa-heart"></i></a></li>
+                                    <li>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickView">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-categories">
+    <div class="categories-head">
+        <h3 class="categories-head-content">
+            <span class="subtitle d-block">Our Fashion</span>
+            <span class="title d-block">Shop by fashion</span>
+            <span class="description d-block">Helping people manage anxiety, pain, and <br> sleeplessness.</span>
+        </h3>
+    </div>
+    <div class="categories-list">
+        <div class="category-container">
+            <div class="row">
+                @foreach (var item in Model.Trends)
+                {
+                    <div class="col-md-3 col-sm-6">
+                        <div class="card mb-3">
+                            <img src="~/assets/images/@item.PhotoName" height="400" alt="Card image cap">
+                            <div class="category-detail">
+                                <h5 class="card-title heading text-center">@Html.Raw(item.Title)</h5>
+                                <span class="subheading">@Html.Raw(item.SubTitle)</span>
+                                <blockquote>
+                                    @Html.Raw(item.Description)
+                                </blockquote>
+                                <button type="button" class="btn btn-outline-dark">BUY NOW</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="product-banner">
+    <div class="banner-img">
+        <img class="img-fluid" src="~/assets/img/banner-01.jpg" />
+    </div>
+    <div class="content-banner d-inline-block">
+        <h3 class="banner-tbay-title">
+            <span class="title">Utility Kit</span>
+        </h3>
+        <div class="banner-description">Your NEW everyday MVPs <br> are reporting for duty</div>
+        <div class="banner-label"><button class="offset">Shop Jacket Now</button></div>
+    </div>
+</section>
+
+<section class="style-gallery">
+    <div class="style-gallery-header">
+        <span class="style-gallery-subtitle">Style Gallery</span>
+        <span class="style-gallery-title">Say hello subscribe to update</span>
+        <span class="style-gallery-description">Helping people manage anxiety, pain, and sleeplessness.</span>
+    </div>
+    <div class="style-gallery-image-container">
+        <div class="row">
+            @foreach (var item in Model.StyleGalleries)
+            {
+                <div class="col-lg-3 col-md-6 col-sm-6 div-@item.Order"><a data-text="@item.CoverLetter"><img src="~/assets/images/@item.PhotoName"></a></div>
+            }
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("Feature");
+

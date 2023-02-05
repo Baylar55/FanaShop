@@ -1,0 +1,46 @@
+﻿@using Web.ViewModels.Wishlist;
+@model List<WishlistItemVM>;
+
+<section class="intro-banner">
+    <div>
+        <img src="~/assets/img/breadcrumbs-woo.jpg" class="img-fluid">
+        <div class="banner-text">
+            <p class="banner-title">Shop</p>
+        </div>
+    </div>
+</section>
+
+<section class="wishlist-section">
+    <div class="wishlist-container">
+        <div class="row">
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="wishlist-item col-lg-3 col-md-4 col-sm-6" id="@item.Id">
+                        <div class="item-img">
+                            <img src="~/assets/images/@item.PhotoName" alt="">
+                        </div>
+                        <div class="item-content">
+                            <p class="item-price">$@item.Price</p>
+                            <p class="item-name"><a asp-action="singleproduct" asp-controller="shop" asp-route-id="@item.Id">@item.Title</a></p>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <button type="submit" class="add-to-cart" id="addToCart" data-id="@item.Id" onclick="launchNotification()">Add To Cart</button>
+                            }
+                            <button class="remove-item wish-delete" data-id="@item.Id"><i class="fa-regular fa-trash-can"></i><span>Remove</span></button>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="mt-5">
+                    <p style="font-size:18px">Wish list is empty...</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("Feature");

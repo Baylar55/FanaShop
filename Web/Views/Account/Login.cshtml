@@ -1,0 +1,44 @@
+﻿@using Web.ViewModels.Account
+@model AccountLoginVM
+
+@{
+    var returnUrl = Context.Request.Query["returnUrl"];
+}
+
+<section class="vh-100 login-section" style="background-color: #f4f1ec;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                                 alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        </div>
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="login-card">
+                                <p><img src="~/assets/img/fana-logo.svg" alt=""></p>
+                                <form class="login-form" asp-controller="account" asp-action="login" method="post">
+                                    <input asp-for="ReturnUrl" type="hidden" value="@returnUrl" />
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <input asp-for="Username" spellcheck="false" class="control" type="text" placeholder="Username" />
+                                    <div class="password">
+                                        <input asp-for="Password" spellcheck="false" class="control" id="password" type="password" placeholder="Password" />
+                                        <button class="toggle" type="button" onclick="togglePassword(this)"></button>
+                                    </div>
+                                    <button class="control" type="submit">LOGIN</button>
+                                    <div class="form-group d-flex justify-content-center">
+                                        <div>
+                                            <span>Don't have account yet?</span> <a asp-action="register" asp-controller="account">Register now</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

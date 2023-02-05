@@ -1,0 +1,19 @@
+﻿@using Core.Entities;
+@model List<Feature>
+
+<section class="features mt-5">
+    <div class="features-container d-flex row gap-3">
+        @foreach (var feature in Model)
+        {
+            <div class="col-md-6 col-sm-6 col-lg-6">
+                <div class="box">
+                    @Html.Raw(feature.IconCode)
+                    <h3>@Html.Raw(feature.Title)</h3>
+                </div>
+                <div class="content">
+                    @Html.Raw(feature.Description)
+                </div>
+            </div>
+        }
+    </div>
+</section>

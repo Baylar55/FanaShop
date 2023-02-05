@@ -1,0 +1,14 @@
+﻿@using Core.Entities
+@model List<Question>
+<div class="question">
+    <ul id="accordion">
+        @foreach (var question in Model)
+        {
+            <li data-aos="fade-up" data-aos-duration="2000">
+                <span>@Html.Raw(question.Title)</span>
+                <div>@Html.Raw(question.Answer)</div>
+            </li>
+        }
+    </ul>
+</div>
+<script src="~/js/script.js"></script>

@@ -1,0 +1,60 @@
+﻿@using Web.Areas.Admin.ViewModels.Blog
+@model BlogIndexVM
+<header>
+    <style>
+        td {
+            vertical-align: middle !important;
+            
+        }
+        td *{
+        font-size:17px !important;
+        }
+        th {
+            text-align: center;
+        }
+    </style>
+</header>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Blog Table</h6>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-primary mb-3" asp-action="create" asp-controller="Blog">Create Blog</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cover Photo</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th colspan="3" style="text-align:center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var blog in Model.Blogs)
+                    {
+                        <tr>
+                            <td>@blog.Id</td>
+                            <td><img style="width:90px; height:70px; object-fit:contain; justify-content:flex-start" src="~/assets/images/@blog.CoverPhoto" /></td>
+                            <td class="align-middle">@Html.Raw(blog.Title)</td>
+                            <td class="align-middle">@Html.Raw(String.Join(" ", blog.Description.Split(' ').Take(8))) .........</td>
+                            <td width="20px">
+                                <a asp-action="update" asp-controller="Blog" asp-route-id="@blog.Id" class="btn btn-primary">Update</a>
+                            </td>
+                            <td width="20px">
+                                <form method="post">
+                                    <button asp-action="delete" asp-controller="Blog" asp-route-id="@blog.Id" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                            <td width="20px">
+                                <a asp-action="details" asp-controller="Blog" asp-route-id="@blog.Id" class="btn btn-info">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

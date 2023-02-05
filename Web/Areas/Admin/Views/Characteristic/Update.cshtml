@@ -1,0 +1,46 @@
+﻿@using Core.Entities;
+@using Web.Areas.Admin.ViewModels.Characteristic;
+@model CharacteristicUpdateVM;
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="update" asp-controller="characteristic">
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <textarea class="form-control" asp-for="Title"></textarea>
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IconCode">Icon Code</label>
+                                <textarea class="form-control" asp-for="IconCode"></textarea>
+                                <span class="text-danger" asp-validation-for="IconCode"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+
+<script>
+    const properties = ["Title", "Description"]
+    properties.forEach(function (element) {
+        CKEDITOR.replace(`${element}`);
+    })
+</script>

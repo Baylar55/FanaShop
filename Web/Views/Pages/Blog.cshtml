@@ -1,0 +1,51 @@
+﻿@using Web.ViewModels.Pages
+@model PagesIndexVM
+
+<section class="blog-section">
+    <div class="row">
+
+        @foreach (var blog in Model.Blogs)
+        {
+            <div class="blog-element col-lg-4 col-md-6 ">
+                <div class="bp-mini bp-mini-img">
+                    <div class="bp-mini-thumbnail">
+                        <a href="blog-detail.html">
+                            <img src="~/assets/images/@blog.CoverPhoto" alt="">
+                        </a>
+                    </div>
+                    <div class="bp-mini-content">
+                        <div class="bp-mini-category">
+                            Category : @blog.Category.Title
+                        </div>
+                        <h4>
+                            <a asp-controller="pages" asp-action="singleblog" asp-route-id="@blog.Id">How to choose the right customer for your photo?</a>
+                        </h4>
+                        <div class="bp-mini-stat">
+                            <span class="bp-mini-stat-wrap">
+                                <span class="bp-mini-author"><i class="fa-regular fa-circle-user"></i>By @blog.Author</span>
+                            </span>
+                            <span class="bp-mini-stat-wrap">
+                                <span class="bp-mini-publish-date">
+                                    <span><i class="fa-regular fa-clock"></i>@blog.CreatedAt</span>
+                                </span>
+                            </span>
+                        </div>
+                        <p class="bp-mini-p">
+                           @Html.Raw(@String.Join(" ",@blog.Description.Split(' ').Take(15)))  .........
+                        </p>
+                    </div>
+                </div>
+                <button><a asp-action="singleblog" asp-route-id="@blog.Id" asp-controller="pages">Read More</a></button>
+            </div>
+        }
+    </div>
+    <div class="pagination d-flex justify-content-center">
+        <div class="pagination-element"><i class="fa-solid fa-left-long"></i></div>
+        <div class="pagination-element">1</div>
+        <div class="pagination-element pagination-active">2</div>
+        <div class="pagination-element">3</div>
+        <div class="pagination-element"><i class="fa-solid fa-right-long"></i></div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("Feature");

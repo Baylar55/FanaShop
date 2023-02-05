@@ -1,0 +1,55 @@
+﻿@using Core.Constants;
+@using Core.Entities;
+@using Web.Areas.Admin.ViewModels.Trend
+@model TrendUpdateVM;
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Update Trend
+                        </p>
+                        <form method="post" enctype="multipart/form-data" asp-action="update" asp-controller="Trend">
+                            <div class="form-group">
+                                <label asp-for="Title">Title</label>
+                                <textarea class="form-control" asp-for="Title"></textarea>
+                                <span class="text-danger" asp-validation-for="Title"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="SubTitle">Sub Title</label>
+                                <textarea class="form-control" asp-for="SubTitle"></textarea>
+                                <span class="text-danger" asp-validation-for="SubTitle"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Photo</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.ckeditor.com/4.20.1/full/ckeditor.js"></script>
+
+<script>
+    const properties = ["Title", "SubTitle", "Description"]
+    properties.forEach(function (element) {
+        CKEDITOR.replace(`${element}`);
+    })
+</script>

@@ -1,0 +1,67 @@
+﻿@using Web.Areas.Admin.ViewModels.Product;
+@model ProductIndexVM;
+<header>
+    <style>
+        td {
+            vertical-align: middle !important;
+        }
+
+        td *{
+           font-size: 17px !important;
+        }
+
+        th {
+           text-align: center;
+        }
+    </style>
+</header>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Product Table</h6>
+    </div>
+    <div class="card-body">
+        <a class="btn btn-primary mb-3" asp-action="create" asp-controller="Product">Create Product</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cover Photo</th>
+                        <th>Title</th>
+                        <th>Price</th>
+                        <th colspan="5" style="text-align:center">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var Product in Model.Products)
+                    {
+                        <tr>
+                            <td>@Product.Id</td>
+                            <td><img style="width:90px; height:70px; object-fit:contain; justify-content:flex-start" src="~/assets/images/@Product.MainPhoto" /></td>
+                            <td style="width:20%;" class="align-middle">@Product.Name</td>
+                            <td class="align-middle">@Product.Price $</td>
+                            <td>
+                                <a asp-action="update" asp-controller="Product" asp-route-id="@Product.Id" class="btn btn-primary">Update</a>
+                            </td>
+                            <td>
+                                <form method="post">
+                                    <button asp-action="delete" asp-controller="Product" asp-route-id="@Product.Id" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                            <td>
+                                <a asp-action="details" asp-controller="Product" asp-route-id="@Product.Id" class="btn btn-info">Details</a>
+                            </td>
+                            <td>
+                                <a asp-action="addsize" asp-controller="product" asp-route-id="@Product.Id" class="btn btn-primary">Add Size</a>
+                            </td>
+                            <td>
+                                <a asp-action="addcolor" asp-controller="product" asp-route-id="@Product.Id" class="btn btn-primary">Add Color</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+﻿@using Web.ViewModels.Pages
+@model PagesIndexVM
+
+<section class="aboutus-content">
+    <section class="intro-banner">
+        <div>
+            <img src="~/assets/img/breadcrumbs-woo.jpg" class="img-fluid">
+            <div class="banner-text">
+                <p class="banner-title">Fana Shop</p>
+            </div>
+        </div>
+    </section>
+
+
+    @if (Model.AboutIntro != null)
+    {
+        <section class="about-intro-banner">
+            <div class="banner-wrapper">
+                <img src="~/assets/images/@Model.AboutIntro.PhotoName">
+            </div>
+        </section>
+        <section class="about-intro">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="about">
+                            <div class="about-container">
+                                <div class="about-info">
+                                    @*<h2 class="about-intro-heading">Welcome to Fana Shop!</h2>*@
+                                   <div class="about-intro-heading">@Html.Raw(Model.AboutIntro.Title)</div> 
+                                    <div class="about-p-wrap">
+                                        <div class="about-intro-content">
+                                            @Html.Raw(Model.AboutIntro.Description)
+                                        </div>
+                                    </div>
+                                    <button class="offset"><a asp-controller="shop" asp-action="productlist">Shop Now</a></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+
+    <section class="team-member-section">
+        <div class="section-text-wrap">
+            <h1 class="team-member-heading text-center">Our Team</h1>
+            <p class="team-member-subheading text-center">
+                Pellentesque posuere orci lobortis scelerisque blandit.
+                Donec id tellus
+                lacinia an, tincidunt risus ac
+            </p>
+        </div>
+        <div class="team-member-content">
+            <div class="team-member-container">
+                <div class="row">
+
+                    @foreach (var member in Model.TeamMembers)
+                    {
+                        <div class="col-lg-3 col-md-4 col-sm-6 ">
+                            <div class="team-member u-h-100">
+                                <div class="team-member-wrap">
+                                    <div>
+                                        <img class="team-member-img" src="~/assets/images/@member.PhotoName" alt="">
+                                    </div>
+                                    <div class="team-member-social-wrap">
+                                        <ul class="team-member-social-list">
+                                            <li>
+                                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="team-member-info">
+                                    <span class="team-member-name">@member.Name</span>
+                                    <span class="team-member-job-title">@member.Speciality</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients-intro">
+        <div class="clients-text-wrap">
+            <h1 class="clients-heading text-center">Clients Feedback</h1>
+        </div>
+        <div class="clients-content">
+            <div class="container">
+                <div class="slider-fouc">
+                    <div class="owl-carousel" id="testimonial-slider">
+
+                        @foreach (var feedback in Model.Feedbacks)
+                        {
+                            <div class="testimonial">
+                                <div class="testimonial__img-wrap">
+                                    <img class="testimonial__img" style="object-fit:cover" src="~/assets/images/@feedback.PhotoName" alt="">
+                                </div>
+                                <div class="testimonial__content-wrap">
+                                    <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
+                                    <blockquote class="testimonial__block-quote">
+                                        <p>
+                                            "@feedback.Description"
+                                        </p>
+                                    </blockquote>
+                                    <span class="testimonial__author">@feedback.ClientName</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @await Component.InvokeAsync("Feature");
+</section>

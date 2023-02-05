@@ -1,0 +1,34 @@
+﻿@using Core.Entities;
+@using Web.Areas.Admin.ViewModels.StyleGallery
+@model StyleGalleryCreateVM;
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Create Gallery
+                        </p>
+                        <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="stylegallery">
+                            <div class="form-group">
+                                <label asp-for="CoverLetter">Cover Letter</label>
+                                <input class="form-control" asp-for="CoverLetter">
+                                <span class="text-danger" asp-validation-for="CoverLetter"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photo">Photo</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span class="text-danger" asp-validation-for="Photo"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

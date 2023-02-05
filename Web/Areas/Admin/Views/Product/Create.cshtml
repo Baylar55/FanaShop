@@ -1,0 +1,92 @@
+﻿@using Core.Constants
+@using Web.Areas.Admin.ViewModels.Product
+@model ProductCreateVM
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Create Product
+                        </p>
+                        <form method="post" enctype="multipart/form-data" asp-action="create" asp-controller="Product" asp-area="admin">
+
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input class="form-control" asp-for="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Description">Description</label>
+                                <textarea class="form-control" asp-for="Description"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Price">Price</label>
+                                <input class="form-control" asp-for="Price">
+                                <span class="text-danger" asp-validation-for="Price"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BrandId">Brand</label>
+                                <select class="form-control" asp-for="BrandId" asp-items="Model.Brands"></select>
+                                <span class="text-danger" asp-validation-for="BrandId"></span>
+                            </div>
+
+                             <div class="form-group">
+                                <label asp-for="CategoryId">Category</label>
+                                <select class="form-control" asp-for="CategoryId" asp-items="Model.Categories"></select>
+                                <span class="form-text text-danger " asp-validation-for="CategoryId"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Status" class="col-form-label"></label>
+                                <select asp-for="Status" asp-items="@Html.GetEnumSelectList<ProductStatus>()" class="form-control">
+                                </select>
+                                <span class="text-danger" asp-validation-for="Status"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BestSeller">Best Seller</label>
+                                <input style="margin-left:-45%; border:none; box-shadow:none;" class="form-control" asp-for="BestSeller">
+                                <span class="text-danger" asp-validation-for="BestSeller"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="MainPhoto">Cover Photo</label>
+                                <input class="form-control" asp-for="MainPhoto">
+                                <span class="text-danger" asp-validation-for="MainPhoto"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="BackPhoto">Back Photo</label>
+                                <input class="form-control" asp-for="BackPhoto">
+                                <span class="text-danger" asp-validation-for="BackPhoto"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Photos">Photos</label>
+                                <input class="form-control" asp-for="Photos">
+                                @{
+                                    if (Html.ViewData.ModelState["AboutPhotos"] != null)
+                                    {
+                                        foreach (var error in Html.ViewData.ModelState["AboutPhotos"].Errors)
+                                        {
+                                            <li>@error.ErrorMessage</li>
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

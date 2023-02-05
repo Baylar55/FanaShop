@@ -1,0 +1,111 @@
+﻿@using Web.ViewModels.Components;
+@model HeaderComponentVM;
+
+<header>
+    <div class="header-bottom no-select">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <div class="logo">
+                        <a asp-controller="home" asp-action="index"><img src="~/assets/img/fana-logo.svg" alt=""></a>
+                    </div>
+                </div>
+                <nav class="col-10 d-flex">
+                    <ul class="navigation  d-none d-xl-flex">
+                        <li class="home">
+                            <div class="title active-nav"><a asp-controller="home" asp-action="index" class="active-nav">Home</a></div>
+                        </li>
+                        <li class="pages">
+                            <span class="title">Pages</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-controller="pages" asp-action="blog">Blog</a>
+                                    <a asp-controller="pages" asp-action="faq">FAQ</a>
+                                    <a asp-controller="pages" asp-action="about">About Us</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="shop-list">
+                            <span class="title">Shop</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-controller="shop" asp-action="productlist">Product List</a>
+                                    <a asp-controller="basket" asp-action="index">Shopping Cart</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="contactus">
+                            <div class="title"><a asp-controller="contact" asp-action="index">Contact Us</a></div>
+                        </li>
+                        <li class="account">
+                            <span class="title">Account</span>
+                            <div class="sub-menu">
+                                <div class="sub-menu-wrapper">
+                                    <a asp-controller="account" asp-action="login">Login</a>
+                                    <a asp-controller="account" asp-action="register">Register</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="search-basket-menu d-flex align-items-center">
+                        @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <div>
+                                    <span class="me-2">@User.Identity.Name</span>
+                                    <a asp-action="logout" asp-controller="account" class="me-2" title="LogOut">
+                                        <i class="fa-sharp fa-solid fa-right-from-bracket"></i>
+                                    </a>
+                                </div>
+                            }
+                        }
+                        <div class="wishlist me-3">
+                            <a asp-controller="wishlist" asp-action="index"><i class="fa-regular fa-heart fs-4"></i></a>
+                        </div>
+                        <div class="basket">
+                            <img src="~/assets/img/shopping-cart.png" width="23px" height="23px" alt="">
+                            <span class="cart-items-count text-center">@Model.BasketProductCount</span>
+                        </div>
+                        <div class="burger-menu d-block d-xl-none"><i class="fas fa-bars"></i></div>
+                    </div>
+                </nav>
+                <div class="mini-cart">
+                    <ul class="cart-items">
+                    </ul>
+                </div>
+                <nav class="mobile-nav d-xl-none">
+                    <ul id="accordion">
+                        <li>
+                            <span class="active-nav unique"><a asp-controller="home" asp-action="index" class="active-nav">Home</a></span>
+                        </li>
+                        <li>
+                            <span class="active-nav unique"><a asp-controller="contact" asp-action="index">Contact Us</a></span>
+                        </li>
+                        <li>
+                            <span>Pages</span>
+                            <div class="mn-sub-menu">
+                                <a asp-controller="pages" asp-action="blog">Blog</a>
+                                <a asp-controller="pages" asp-action="faq">FAQ</a>
+                                <a asp-controller="pages" asp-action="about">About Us</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Shop</span>
+                            <div class="mn-sub-menu">
+                                <a asp-controller="shop" asp-action="productlist">Product List</a>
+                                <a asp-controller="basket" asp-action="index">Shopping Cart</a>
+                            </div>
+                        </li>
+                        <li>
+                            <span>Account</span>
+                            <div class="mn-sub-menu">
+                                <a asp-controller="account" asp-action="login">Login</a>
+                                <a asp-controller="account" asp-action="register">Register</a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

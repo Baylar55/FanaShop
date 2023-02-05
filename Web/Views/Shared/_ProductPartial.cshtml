@@ -1,0 +1,52 @@
+﻿@using Core.Entities
+@model List<Product>
+
+@foreach (var product in Model)
+{
+    <div class="col-lg-4 col-md-6 col-sm-6 mt-4 product-container">
+        <div class="product-grid">
+            <div class="product-image">
+                <a class="image">
+                    <img style="object-fit:contain;" class="pic-1" src="~/assets/images/@product.MainPhoto">
+                    <img style="object-fit:contain;" class="pic-2" src="~/assets/images/@product.BackPhoto">
+                </a>
+                @if (product.Status.ToString() == "Sale")
+                {
+                    <span class="product-sale-label" style="background:#FF0000;">@product.Status</span>
+                }
+                @if (product.Status.ToString() == "New")
+                {
+                    <span class="product-sale-label" style="background:#2F4799;">@product.Status</span>
+                }
+                @if (product.Status.ToString() == "Sold")
+                {
+                    <span class="product-sale-label" style="background:#2F2F2F;">@product.Status</span>
+                }
+                @if (product.Status.ToString() == "Limited")
+                {
+                    <span class="product-sale-label" style="background:#FFD700;">@product.Status</span>
+                }
+            </div>
+            <div class="product-content">
+                <h3 class="title">
+                    <a asp-action="singleproduct" asp-controller="shop" asp-route-id="@product.Id">
+                        @product.Name
+                    </a>
+                </h3>
+                <div class="price">$@product.Price</div>
+                <ul class="rating">
+                    <li class="fas fa-star"></li>
+                    <li class="fas fa-star"></li>
+                    <li class="fas fa-star"></li>
+                    <li class="fas fa-star"></li>
+                    <li class="fas fa-star"></li>
+                </ul>
+                <ul class="product-links">
+                    <li id="addToCart" data-id="@product.Id"><a><i class="fa fa-shopping-bag"></i></a></li>
+                    <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
+                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickView"><i class="fa fa-eye"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

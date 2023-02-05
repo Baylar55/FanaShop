@@ -1,0 +1,23 @@
+﻿@using Web.Areas.Admin.ViewModels.Color
+@model ColorCreateVM
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" asp-action="create" asp-controller="color">
+                            <div class="form-group">
+                                <label asp-for="Name">Name or Code</label>
+                                <input class="form-control" asp-for="Name">
+                                <span class="text-danger" asp-validation-for="Name"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

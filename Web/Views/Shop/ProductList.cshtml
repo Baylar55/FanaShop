@@ -1,0 +1,270 @@
+﻿@using Web.ViewModels.Shop
+@model ShopIndexVM
+
+@{
+    var categoryRoute = Context.Request.Query["category-filter"];
+    var brandRoute = Context.Request.Query["brand-filter"];
+    var sizeRoute = Context.Request.Query["size-filter"];
+    var colorRoute = Context.Request.Query["color-filter"];
+    var minPriceRoute = Context.Request.Query["minprice-filter"];
+    var maxPriceRoute = Context.Request.Query["maxprice-filter"];
+    var nameRoute = Context.Request.Query["Name"];
+}
+
+<section class="shop mt-4">
+    <div class="shop-container">
+        <div class="col-lg-3 col-md-4 col-sm-8 filterbar mt-4">
+            <form method="get" asp-action="productlist" asp-controller="shop">
+                <aside class="sidebar">
+                    <h1 class="sidebar-heading">
+                        Filter by
+                    </h1>
+                    <ul class="filter ul-reset">
+                        <li class="filter-item" style=" border-block: 1px solid #eee; padding-bottom: 15px; padding-top: 10px; ">
+                            <div class="search">
+                                <div class="search-product">
+                                    <div class="row">
+                                        <div class="col-6" style="margin-left:10px">
+                                            <div class="form-group">
+                                                <label asp-for="Name"></label>
+                                                <input class="form-control" asp-for="Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="filter-item">
+                            <section class="filter-item-inner">
+                                <h1 class="filter-item-inner-heading minus">
+                                    Categories
+                                </h1>
+                                <ul class="filter-attribute-list ul-reset">
+                                    <div class="filter-attribute-list-inner">
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            @*<li class="filter-attribute-item">
+                                        <div>
+                                        <label for="category-@category.Id" class="filter-attribute-label ib-m productCategory" data-id="@category.Id">
+                                        @category.Title
+                                        </label>
+                                        </div>
+                                        <div>
+                                        (3)   <input type="checkbox" class="filter-attribute-checkbox ib-m" id="category-@category.Id">
+                                        </div>
+                                        </li>*@
+                                            @if (categoryRoute == category.Title)
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" checked type="radio" value="@category.Title" name="category-filter" id="category-@category.Id">
+                                                    <label class="form-check-label productCategory" for="category-@category.Id" data-id="@category.Id">
+                                                        @category.Title
+                                                    </label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@category.Title" name="category-filter" id="category-@category.Id">
+                                                    <label class="form-check-label productCategory" for="category-@category.Id" data-id="@category.Id">
+                                                        @category.Title
+                                                    </label>
+                                                </div>
+                                            }
+
+                                        }
+                                    </div>
+                                </ul>
+                            </section>
+                        </li>
+
+                        <li class="filter-item">
+                            <section class="filter-item-inner">
+                                <h1 class="filter-item-inner-heading minus">
+                                    Brand
+                                </h1>
+                                <ul class="filter-attribute-list ul-reset">
+                                    <div class="filter-attribute-list-inner">
+                                        @foreach (var brand in Model.Brands)
+                                        {
+                                            @if (brandRoute == brand.Title)
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" checked type="radio" value="@brand.Title" name="brand-filter" id="brand-@brand.Id">
+                                                    <label class="form-check-label productBrand" for="brand-@brand.Id" data-id="@brand.Id">
+                                                        @brand.Title
+                                                    </label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@brand.Title" name="brand-filter" id="brand-@brand.Id">
+                                                    <label class="form-check-label productBrand" for="brand-@brand.Id" data-id="@brand.Id">
+                                                        @brand.Title
+                                                    </label>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </ul>
+                            </section>
+                        </li>
+                        <li class="filter-item">
+                            <section class="filter-item-inner">
+                                <h1 class="filter-item-inner-heading minus">
+                                    Size
+                                </h1>
+                                <ul class="filter-attribute-list ul-reset">
+                                    <div class="filter-attribute-list-inner">
+
+                                        @foreach (var size in Model.Sizes)
+                                        {
+                                            @if (size.Id.ToString() == sizeRoute.ToString())
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" checked type="radio" value="@size.Id" name="size-filter" id="size-@size.Id">
+                                                    <label class="form-check-label productSize" for="size-@size.Id" data-id="@size.Id">
+                                                        @size.Title
+                                                    </label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" value="@size.Id" name="size-filter" id="size-@size.Id">
+                                                    <label class="form-check-label productSize" for="size-@size.Id" data-id="@size.Id">
+                                                        @size.Title
+                                                    </label>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </ul>
+                            </section>
+                        </li>
+                    </ul>
+
+                    <div class="price-range-filter mb-5 mt-3">
+                        <h5>Price Range</h5>
+                        <div class="range-slider">
+                            <span class="rangeValues"></span>
+                            <input name="minprice-filter" id="minPrice" asp-for="@Model.PriceRange.MinPrice" min="@Model.PriceRange.MinPrice"
+                                   max="@Model.PriceRange.MaxPrice" step="@Model.PriceRange.Step" type="range">
+
+                            <input name="maxprice-filter" id="maxPrice" asp-for="@Model.PriceRange.MaxPrice" min="@Model.PriceRange.MinPrice"
+                                   max="@Model.PriceRange.MaxPrice" step="@Model.PriceRange.Step" type="range">
+                        </div>
+                    </div>
+
+                    <div class="product-color-filter">
+                        <h5>Color</h5>
+                        <ul class="shop-w__list gl-scroll">
+                            @foreach (var color in Model.Colors)
+                            {
+                                @if (color.Id.ToString() == colorRoute.ToString())
+                                {
+                                    <li>
+                                        <div class="color__check">
+                                            <input type="radio" class="d-none" checked id="color-@color.Id" value="@color.Id" name="color-filter" id="color-@color.Id">
+                                            <label class="color__check-label productColor" data-id="@color.Id" for="color-@color.Id" style="background-color: @color.Name"></label>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="color__check">
+                                            <input type="radio" class="d-none" id="color-@color.Id" value="@color.Id" name="color-filter" id="color-@color.Id">
+                                            <label class="color__check-label productColor" data-id="@color.Id" for="color-@color.Id" style="background-color: @color.Name"></label>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </aside>
+                <div class="filter-btn-container">
+                    <button class="filter-btn">Filter</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-9 col-md-8 productbar">
+
+            <div class="row" id="productContainer">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-10 mt-4 product-container">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a class="image">
+                                    <img style="object-fit:contain;" class="pic-1" src="~/assets/images/@product.MainPhoto">
+                                    <img style="object-fit:contain;" class="pic-2" src="~/assets/images/@product.BackPhoto">
+                                </a>
+                                @if (product.Status.ToString() == "Sale")
+                                {
+                                    <span class="product-sale-label" style="background:#FF0000;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "New")
+                                {
+                                    <span class="product-sale-label" style="background:#2F4799;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "Sold")
+                                {
+                                    <span class="product-sale-label" style="background:#2F2F2F;">@product.Status</span>
+                                }
+                                @if (product.Status.ToString() == "Limited")
+                                {
+                                    <span class="product-sale-label" style="background:#FFD700;">@product.Status</span>
+                                }
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title">
+                                    <a asp-action="singleproduct" asp-controller="shop" asp-route-id="@product.Id">
+                                        @product.Name
+                                    </a>
+                                </h3>
+                                <div class="price">$@product.Price</div>
+                                <ul class="rating">
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                </ul>
+                                <ul class="product-links">
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <li id="addToCart" data-id="@product.Id"><a><i class="fa fa-shopping-bag"></i></a></li>
+                                    }
+                                    <li class="add-wishlist" data-id="@product.Id"><a><i class="fa-regular fa-heart"></i></a></li>
+                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickView"><i class="fa fa-eye"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="pagination d-flex justify-content-center">
+                @if (Model.Page > 1)
+                {
+                    var prevPage = Model.Page - 1;
+                    <a class="pagination-element" asp-action="productlist" asp-controller="shop" asp-route-page="@prevPage" asp-route-name="@Model.Name"><i class="fa-solid fa-left-long"></i></a>
+                }
+                @for (int i = 1; i <= Model.PageCount; i++)
+                {
+                    <a asp-action="productlist" asp-controller="shop" asp-route-page="@i" asp-route-category-filter="@categoryRoute" asp-route-name="@Model.Name" class="@(Model.Page==i ? "pagination-element pagination-active disabled" : "pagination-element")">@i</a>
+                }
+                @if (Model.PageCount != Model.Page)
+                {
+                    var nextPage = @Model.Page + 1;
+                    <a class="pagination-element" asp-action="produclist" asp-controller="shop" asp-route-page="@nextPage" asp-route-name="@Model.Name"><i class="fa-solid fa-right-long"></i></a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@await Component.InvokeAsync("Feature");
+
+
