@@ -20,8 +20,8 @@ namespace Web.Services.Concrete
         {
             var model = new ContactIndexVM
             {
-                Location= await _locationRepository.GetAsync(),
-                ContactComponents= await _contactComponentRepository.GetAllAsync()
+                Location = await _locationRepository.GetAsync(),
+                ContactComponents = await _contactComponentRepository.GetAllAsync()
             };
             return model;
         }

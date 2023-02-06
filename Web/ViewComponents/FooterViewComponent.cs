@@ -2,7 +2,7 @@
 
 namespace Web.ViewComponents
 {
-    public class FooterViewComponent:ViewComponent
+    public class FooterViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync()
         {

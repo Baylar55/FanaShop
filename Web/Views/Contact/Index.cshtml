@@ -1,5 +1,9 @@
 ﻿@using Web.ViewModels.Contact
 @model ContactIndexVM
+@{
+    ViewBag.Title = "Contact Us";
+}
+@await Component.InvokeAsync("IntroBanner")
 
 @if (Model.Location != null)
 {

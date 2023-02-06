@@ -22,7 +22,9 @@ namespace DataAccess.Repositories.Concrete
         public async Task<List<Question>> GetAllWithCategoriesAsync()
         {
             return await _context.Question
+                            .OrderByDescending(q => q.Id)
                             .Include(q => q.FAQCategory)
+                            .Take(6)
                             .ToListAsync();
         }
     }

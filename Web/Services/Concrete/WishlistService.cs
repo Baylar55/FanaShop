@@ -6,7 +6,7 @@ using Web.ViewModels.Wishlist;
 
 namespace Web.Services.Concrete
 {
-    public class WishlistService:IWishlistService
+    public class WishlistService : IWishlistService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IProductRepository _productRepository;

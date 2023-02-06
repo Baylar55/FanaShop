@@ -31,5 +31,6 @@ namespace DataAccess.Contexts
         public DbSet<ContactComponent> ContactComponent { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<StyleGallery> StyleGallery { get; set; }
+        public DbSet<Trend> Trend { get; set; }
     }
 }

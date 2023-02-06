@@ -29,7 +29,7 @@ namespace Web.Services.Concrete
 
         public async Task<bool> Add(int productId)
         {
-            
+
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             if (user == null) return false;
 

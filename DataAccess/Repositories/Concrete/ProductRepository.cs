@@ -2,7 +2,6 @@
 using DataAccess.Contexts;
 using DataAccess.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 
 namespace DataAccess.Repositories.Concrete
 {

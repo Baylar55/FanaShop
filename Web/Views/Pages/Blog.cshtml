@@ -9,7 +9,7 @@
             <div class="blog-element col-lg-4 col-md-6 ">
                 <div class="bp-mini bp-mini-img">
                     <div class="bp-mini-thumbnail">
-                        <a href="blog-detail.html">
+                        <a >
                             <img src="~/assets/images/@blog.CoverPhoto" alt="">
                         </a>
                     </div>
@@ -40,11 +40,20 @@
         }
     </div>
     <div class="pagination d-flex justify-content-center">
-        <div class="pagination-element"><i class="fa-solid fa-left-long"></i></div>
-        <div class="pagination-element">1</div>
-        <div class="pagination-element pagination-active">2</div>
-        <div class="pagination-element">3</div>
-        <div class="pagination-element"><i class="fa-solid fa-right-long"></i></div>
+        @if (Model.Page > 1)
+        {
+            var prevPage = Model.Page - 1;
+            <a class="pagination-element" asp-action="blog" asp-controller="pages" asp-route-page="@prevPage"><i class="fa-solid fa-left-long"></i></a>
+        }
+        @for (int i = 1; i <= Model.PageCount; i++)
+        {
+            <a asp-action="blog" asp-controller="pages" asp-route-page="@i" class="@(Model.Page==i ? "pagination-element pagination-active disabled" : "pagination-element")">@i</a>
+        }
+        @if (Model.PageCount != Model.Page)
+        {
+            var nextPage = @Model.Page + 1;
+            <a class="pagination-element" asp-action="blog" asp-controller="blog" asp-route-page="@nextPage"><i class="fa-solid fa-right-long"></i></a>
+        }
     </div>
 </section>
 

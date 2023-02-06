@@ -8,7 +8,7 @@ using Web.Areas.Admin.ViewModels.Trend;
 
 namespace Web.Areas.Admin.Services.Concrete
 {
-    public class TrendService:ITrendService
+    public class TrendService : ITrendService
     {
         private readonly ModelStateDictionary _modelState;
         private readonly IFileService _fileService;

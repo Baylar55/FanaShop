@@ -6,5 +6,8 @@ namespace DataAccess.Repositories.Abstract
     {
         Task<Blog> GetWithPhotosAsync(int id);
         Task<List<Blog>> GetAllWithCategoriesAsync();
+        Task<List<Blog>> GetRelatedAsync(int id);
+        Task<List<Blog>> PaginateBlogsAsync(int page, int take);
+        Task<int> GetPageCountAsync(int take);
     }
 }

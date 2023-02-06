@@ -4,7 +4,7 @@ using Web.ViewModels.Components;
 
 namespace Web.ViewComponents
 {
-    public class HeaderViewComponent:ViewComponent
+    public class HeaderViewComponent : ViewComponent
     {
         private readonly IBasketProductRepository _basketProductRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;

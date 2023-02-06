@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace Web.ViewModels.Wishlist
+﻿namespace Web.ViewModels.Wishlist
 {
     public class WishlistItemVM
     {

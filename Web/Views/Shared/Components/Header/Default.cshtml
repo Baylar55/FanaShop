@@ -96,13 +96,16 @@
                                 <a asp-controller="basket" asp-action="index">Shopping Cart</a>
                             </div>
                         </li>
+                        @if (Context.User.Identity.IsAuthenticated)
+                        {
                         <li>
                             <span>Account</span>
                             <div class="mn-sub-menu">
                                 <a asp-controller="account" asp-action="login">Login</a>
                                 <a asp-controller="account" asp-action="register">Register</a>
                             </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </nav>
             </div>

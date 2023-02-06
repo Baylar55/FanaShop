@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 using Web.Areas.Admin.Services.Abstract;
 using Web.Areas.Admin.ViewModels.Feature;
 

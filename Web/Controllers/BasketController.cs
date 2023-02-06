@@ -14,7 +14,7 @@ namespace Web.Controllers
         {
             _basketService = basketService;
         }
-        
+
         public async Task<IActionResult> Index()
         {
             var model = await _basketService.GetBasketProducts();
@@ -25,7 +25,7 @@ namespace Web.Controllers
         public async Task<IActionResult> Add(BasketAddVM model)
         {
             if (await _basketService.Add(model.Id)) return Ok();
-            return RedirectToAction("login","account");
+            return RedirectToAction("login", "account");
         }
 
         [HttpPost]

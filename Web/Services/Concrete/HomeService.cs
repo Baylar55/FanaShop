@@ -28,7 +28,7 @@ namespace Web.Services.Concrete
                 HomeMainSliders = await _homeMainSliderRepository.GetAllAsync(),
                 BestSellerProducts = await _productRepository.GetBestSellerAsync(),
                 StyleGalleries = await _styleGalleryRepository.GetAllAsync(),
-                Trends= await _trendRepository.GetAllAsync(),
+                Trends = await _trendRepository.GetAllAsync(),
             };
             return model;
         }

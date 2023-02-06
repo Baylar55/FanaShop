@@ -8,8 +8,8 @@ using Web.Areas.Admin.ViewModels.StyleGallery;
 
 namespace Web.Areas.Admin.Services.Concrete
 {
-    public class StyleGalleryService:IStyleGalleryService
-    { 
+    public class StyleGalleryService : IStyleGalleryService
+    {
         private readonly ModelStateDictionary _modelState;
         private readonly IStyleGalleryRepository _styleGalleryRepository;
         private readonly IFileService _fileService;
@@ -38,16 +38,16 @@ namespace Web.Areas.Admin.Services.Concrete
             if (dbStyleGallery == null) return null;
             var model = new StyleGalleryUpdateVM()
             {
-               CoverLetter = dbStyleGallery.CoverLetter,
-               Order= dbStyleGallery.Order,
+                CoverLetter = dbStyleGallery.CoverLetter,
+                Order = dbStyleGallery.Order,
             };
             return model;
         }
 
         public async Task<bool> CreateAsync(StyleGalleryCreateVM model)
         {
-            var galleries= await _styleGalleryRepository.GetAllAsync();
-            var galleryCount= galleries.Count();
+            var galleries = await _styleGalleryRepository.GetAllAsync();
+            var galleryCount = galleries.Count();
             if (!_modelState.IsValid) return false;
             if (!_fileService.IsImage(model.Photo))
             {

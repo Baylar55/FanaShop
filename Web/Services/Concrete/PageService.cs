@@ -34,17 +34,25 @@ namespace Web.Services.Concrete
             _characteristicRepository = characteristicRepository;
         }
 
-        public async Task<PagesIndexVM> GetAsync()
+        public async Task<PagesIndexVM> GetAsync(PagesIndexVM model)
         {
-            var model = new PagesIndexVM()
+            var pageCount = await _blogRepository.GetPageCountAsync(model.Take);
+
+            if (model.Page <= 0) return model;
+
+            var blogs = await _blogRepository.PaginateBlogsAsync(model.Page, model.Take);
+            model = new PagesIndexVM()
             {
                 FAQCategories = await _categoryRepository.GetAllAsync(),
-                Questions = await _questionRepository.GetAllAsync(),
+                Questions = await _questionRepository.GetAllWithCategoriesAsync(),
                 TeamMembers = await _teamMemberRepository.GetAllAsync(),
                 Feedbacks = await _feedbackRepository.GetAllAsync(),
                 Characteristics = await _characteristicRepository.GetAllAsync(),
                 AboutIntro = await _aboutIntroRepository.GetAsync(),
-                Blogs = await _blogRepository.GetAllWithCategoriesAsync(),
+                Blogs = blogs,
+                Take= model.Take,
+                PageCount= pageCount,
+                Page=model.Page,
             };
             return model;
         }
@@ -54,7 +62,7 @@ namespace Web.Services.Concrete
             var model = new SingleBlogIndexVM()
             {
                 Blog = await _blogRepository.GetWithPhotosAsync(id),
-                Blogs = await _blogRepository.GetAllWithCategoriesAsync(),
+                Blogs = await _blogRepository.GetRelatedAsync(id),
             };
             return model;
         }

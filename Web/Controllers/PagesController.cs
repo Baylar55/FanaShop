@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Web.Services.Abstract;
+using Web.ViewModels.Pages;
 
 namespace Web.Controllers
 {
@@ -11,9 +12,9 @@ namespace Web.Controllers
         {
             _pageService = pageService;
         }
-        public async Task<IActionResult> Blog()
+        public async Task<IActionResult> Blog(PagesIndexVM model)
         {
-            var model = await _pageService.GetAsync();
+            model = await _pageService.GetAsync(model);
             return View(model);
         }
         public async Task<IActionResult> SingleBlog(int id)
@@ -21,14 +22,14 @@ namespace Web.Controllers
             var model = await _pageService.GetBlogByIdAsync(id);
             return View(model);
         }
-        public async Task<IActionResult> FAQ()
+        public async Task<IActionResult> FAQ(PagesIndexVM model)
         {
-            var model = await _pageService.GetAsync();
+             model = await _pageService.GetAsync(model);
             return View(model);
         }
-        public async Task<IActionResult> About()
+        public async Task<IActionResult> About(PagesIndexVM model)
         {
-            var model = await _pageService.GetAsync();
+            model = await _pageService.GetAsync(model);
             return View(model);
         }
         public async Task<IActionResult> LoadQuestions(int id)
